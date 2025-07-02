@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Calendar 2025</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #f5f5f5;
+        }
+
+        #today {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #bbbbbb;
+        }
+
+        .btn {
+            background-color: #010101;
+            color: white;
+            border: 1px solid white;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .btn:hover {
+            background-color: #1d1d1d;
+            border: 1px solid rgb(181, 181, 181);
+        }
+
+        .btn:active {
+            scale: .95;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .month {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .month h2 {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .day,
+        .day-name {
+            padding: 6px 0;
+            border-radius: 4px;
+        }
+
+        .day-name {
+            font-weight: bold;
+            color: #888;
+        }
+
+        .day {
+            background-color: #2a2a2a;
+            position: relative;
+        }
+
+        .day[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            font-size: 0.7rem;
+            z-index: 10;
+        }
+
+        .today {
+            border: 2px solid #a49100;
+            background-color: #1f2b2c;
+            box-shadow: 0 0 8px #486000aa;
+        }
+
+        .past {
+            opacity: 0.4;
+        }
+
+        .event-day.holiday {
+            background-color: #522546;
+            color: white;
+        }
+
+        .event-day.schchange {
+            background-color: #dbdbdb;
+            color: black;
+        }
+
+        .event-day.exam {
+            background-color: #F7374F;
+            color: white;
+        }
+
+        .event-day.pecfest {
+            background-color: #FFB22C;
+            color: black;
+        }
+
+        .event-day.sports {
+            background-color: #E17564;
+            color: white;
+        }
+
+        .event-day.imp {
+            background-color: #0087a9;
+            color: white;
+        }
+
+        .legend {
+            margin-top: 30px;
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align: center;">Academic Calendar 2025-26 (July–Dec 2025)</h1>
+    <div id="today">Loading today...</div>
+    <a target="_blank" href="https://pec.ac.in">
+        <button class="btn">View Original</button>
+    </a>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background:#522546"></div>Holiday
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#F7374F"></div>Exam
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#E17564"></div>Sports Day
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#FFB22C"></div>PECfest
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#cdcdcd"></div>Schedule Change
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#0087a9"></div>Other Important dates
+        </div>
+    </div>
+
+    <script>
+        const calendarGrid = document.getElementById('calendarGrid');
+        const todayLabel = document.getElementById('today');
+
+        const monthsToShow = [6, 7, 8, 9, 10, 11]; // July - December
+        const year = 2025;
+
+        const events = [
+            { date: '2025-08-14', type: 'holiday', label: 'Independence Day' },
+            { date: '2025-09-21', type: 'holiday', label: 'Maharaja Agarsain Jayanti' },
+            { date: '2025-10-01', type: 'holiday', label: 'Gandhi Jayanti' },
+            { date: '2025-10-06', type: 'holiday', label: 'Maharishi Valmiki Birthday' },
+            { date: '2025-10-19', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-10-20', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-10-21', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-10-22', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-10-23', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-11-04', type: 'holiday', label: 'Birthday of Shri Guru Nanak Dev ji' },
+            { date: '2025-10-26', type: 'schchange', label: 'Friday' },
+            { date: '2025-11-10', type: 'schchange', label: 'Friday' },
+            { date: '2025-11-24', type: 'imp', label: 'End of Session' },
+            { date: '2025-07-27', type: 'imp', label: 'Begin of Session' },
+            { date: '2025-11-25', type: 'imp', label: 'Reserved' },
+            { date: '2025-11-26', type: 'imp', label: 'Reserved' },
+            { date: '2025-11-27', type: 'imp', label: 'Reserved' },
+            { date: '2025-11-28', type: 'imp', label: 'Reserved' },
+            { date: '2025-11-29', type: 'imp', label: 'Reserved' },
+            { date: '2025-10-07', type: 'exam', label: 'Midsem Start' },
+            { date: '2025-10-08', type: 'exam'},
+            { date: '2025-10-09', type: 'exam'},
+            { date: '2025-10-10', type: 'exam'},
+            { date: '2025-10-11', type: 'exam'},
+            { date: '2025-10-12', type: 'exam'},
+            { date: '2025-10-13', type: 'exam', label: 'Midsem End' },
+            { date: '2025-11-30', type: 'exam', label: 'Endsem Start' },
+            { date: '2025-12-01', type: 'exam'},
+            { date: '2025-12-02', type: 'exam'},
+            { date: '2025-12-03', type: 'exam'},
+            { date: '2025-12-04', type: 'exam'},
+            { date: '2025-12-05', type: 'exam'},
+            { date: '2025-12-06', type: 'exam'},
+            { date: '2025-12-07', type: 'exam'},
+            { date: '2025-12-08', type: 'exam'},
+            { date: '2025-12-09', type: 'exam', label: 'Endsem End' },
+            { date: '2025-10-30', type: 'sports', label: 'Athletic Meet' },
+            { date: '2025-10-31', type: 'sports', label: 'Athletic Meet' },
+            { date: '2025-11-01', type: 'sports', label: 'Athletic Meet' },
+            { date: '2025-10-20', type: 'holiday', label: 'Dussehra' },
+            { date: '2025-11-13', type: 'pecfest', label: 'PECfest Day 1' },
+            { date: '2025-11-14', type: 'pecfest', label: 'PECfest Day 2' },
+            { date: '2025-11-15', type: 'pecfest', label: 'PECfest Day 3' },
+        ];
+
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        function renderCalendar() {
+            const today = new Date();
+            const todayISO = today.toISOString().split('T')[0];
+            todayLabel.innerText = `Today: ${today.toLocaleDateString('en-GB', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            })}`;
+
+            monthsToShow.forEach(month => {
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'month';
+                const monthName = firstDay.toLocaleString('default', { month: 'long' });
+                monthDiv.innerHTML = `<h2>${monthName} ${year}</h2>`;
+
+                const daysContainer = document.createElement('div');
+                daysContainer.className = 'days';
+
+                dayNames.forEach(d => {
+                    const dayLabel = document.createElement('div');
+                    dayLabel.className = 'day-name';
+                    dayLabel.textContent = d;
+                    daysContainer.appendChild(dayLabel);
+                });
+
+                for (let i = 0; i < firstDay.getDay(); i++) {
+                    daysContainer.appendChild(document.createElement('div'));
+                }
+
+                for (let d = 1; d <= lastDay.getDate(); d++) {
+                    const date = new Date(year, month, d);
+                    const iso = date.toISOString().split('T')[0];
+                    const weekday = date.getDay();
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'day';
+
+                    if (iso === todayISO) {
+                        dayDiv.classList.add('today');
+                    } else if (date < today) {
+                        dayDiv.classList.add('past');
+                    }
+
+                    const event = events.find(e => e.date === iso);
+                    if (event) {
+                        dayDiv.classList.add('event-day', event.type);
+                        if (event.label) {
+                            dayDiv.title = event.label;
+                        }
+                    } else if (weekday === 0 || weekday === 6) {
+                        dayDiv.classList.add('event-day', 'holiday');
+                        dayDiv.title = weekday === 0 ? 'Sunday' : 'Saturday';
+                    }
+
+                    dayDiv.textContent = d;
+                    daysContainer.appendChild(dayDiv);
+                }
+
+                monthDiv.appendChild(daysContainer);
+                calendarGrid.appendChild(monthDiv);
+            });
+        }
+
+        renderCalendar();
+    </script>
+</body>
+
+</html>
