@@ -222,56 +222,68 @@
         const year = 2025;
 
         const events = [
-            { date: '2025-08-14', type: 'holiday', label: 'Independence Day' },
-            { date: '2025-09-21', type: 'holiday', label: 'Maharaja Agarsain Jayanti' },
-            { date: '2025-10-01', type: 'holiday', label: 'Gandhi Jayanti' },
-            { date: '2025-10-06', type: 'holiday', label: 'Maharishi Valmiki Birthday' },
-            { date: '2025-10-19', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-08-15', type: 'holiday', label: 'Independence Day' },
+            { date: '2025-09-22', type: 'holiday', label: 'Maharaja Agarsain Jayanti' },
+            { date: '2025-10-02', type: 'holiday', label: 'Gandhi Jayanti' },
+            { date: '2025-10-07', type: 'holiday', label: 'Maharishi Valmiki Birthday' },
             { date: '2025-10-20', type: 'holiday', label: 'Mid Semester Break' },
-            { date: '2025-10-21', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-10-21', type: 'holiday', label: 'Dussehra' },
             { date: '2025-10-22', type: 'holiday', label: 'Mid Semester Break' },
             { date: '2025-10-23', type: 'holiday', label: 'Mid Semester Break' },
-            { date: '2025-11-04', type: 'holiday', label: 'Birthday of Shri Guru Nanak Dev ji' },
-            { date: '2025-10-26', type: 'schchange', label: 'Friday' },
-            { date: '2025-11-10', type: 'schchange', label: 'Friday' },
-            { date: '2025-11-24', type: 'imp', label: 'End of Session' },
-            { date: '2025-07-27', type: 'imp', label: 'Begin of Session' },
-            { date: '2025-11-25', type: 'imp', label: 'Reserved' },
+            { date: '2025-10-24', type: 'holiday', label: 'Mid Semester Break' },
+            { date: '2025-11-05', type: 'holiday', label: 'Birthday of Shri Guru Nanak Dev ji' },
+            { date: '2025-10-27', type: 'schchange', label: 'Friday' },
+            { date: '2025-11-11', type: 'schchange', label: 'Friday' },
+            { date: '2025-11-25', type: 'imp', label: 'End of Session' },
+            { date: '2025-07-28', type: 'imp', label: 'Begin of Session' },
             { date: '2025-11-26', type: 'imp', label: 'Reserved' },
             { date: '2025-11-27', type: 'imp', label: 'Reserved' },
             { date: '2025-11-28', type: 'imp', label: 'Reserved' },
             { date: '2025-11-29', type: 'imp', label: 'Reserved' },
-            { date: '2025-10-07', type: 'exam', label: 'Midsem Start' },
-            { date: '2025-10-08', type: 'exam'},
-            { date: '2025-10-09', type: 'exam'},
-            { date: '2025-10-10', type: 'exam'},
-            { date: '2025-10-11', type: 'exam'},
-            { date: '2025-10-12', type: 'exam'},
-            { date: '2025-10-13', type: 'exam', label: 'Midsem End' },
-            { date: '2025-11-30', type: 'exam', label: 'Endsem Start' },
-            { date: '2025-12-01', type: 'exam'},
-            { date: '2025-12-02', type: 'exam'},
-            { date: '2025-12-03', type: 'exam'},
-            { date: '2025-12-04', type: 'exam'},
-            { date: '2025-12-05', type: 'exam'},
-            { date: '2025-12-06', type: 'exam'},
-            { date: '2025-12-07', type: 'exam'},
-            { date: '2025-12-08', type: 'exam'},
-            { date: '2025-12-09', type: 'exam', label: 'Endsem End' },
-            { date: '2025-10-30', type: 'sports', label: 'Athletic Meet' },
+            { date: '2025-11-30', type: 'imp', label: 'Reserved' },
+            { date: '2025-10-08', type: 'exam', label: 'Midsem Start' },
+            { date: '2025-10-09', type: 'exam' },
+            { date: '2025-10-10', type: 'exam' },
+            { date: '2025-10-11', type: 'exam' },
+            { date: '2025-10-12', type: 'exam' },
+            { date: '2025-10-13', type: 'exam' },
+            { date: '2025-10-14', type: 'exam', label: 'Midsem End' },
+            { date: '2025-12-01', type: 'exam', label: 'Endsem Start' },
+            { date: '2025-12-02', type: 'exam' },
+            { date: '2025-12-03', type: 'exam' },
+            { date: '2025-12-04', type: 'exam' },
+            { date: '2025-12-05', type: 'exam' },
+            { date: '2025-12-06', type: 'exam' },
+            { date: '2025-12-07', type: 'exam' },
+            { date: '2025-12-08', type: 'exam' },
+            { date: '2025-12-09', type: 'exam' },
+            { date: '2025-12-10', type: 'exam', label: 'Endsem End' },
             { date: '2025-10-31', type: 'sports', label: 'Athletic Meet' },
             { date: '2025-11-01', type: 'sports', label: 'Athletic Meet' },
-            { date: '2025-10-20', type: 'holiday', label: 'Dussehra' },
-            { date: '2025-11-13', type: 'pecfest', label: 'PECfest Day 1' },
-            { date: '2025-11-14', type: 'pecfest', label: 'PECfest Day 2' },
-            { date: '2025-11-15', type: 'pecfest', label: 'PECfest Day 3' },
+            { date: '2025-11-02', type: 'sports', label: 'Athletic Meet' },
+            { date: '2025-11-14', type: 'pecfest', label: 'PECfest Day 1' },
+            { date: '2025-11-15', type: 'pecfest', label: 'PECfest Day 2' },
+            { date: '2025-11-16', type: 'pecfest', label: 'PECfest Day 3' },
         ];
 
         const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+        const monthNotes = {
+            6: "4 Working Days",
+            7: "20 Working Days",
+            8: "21 Working Days",
+            9: "10 Working Days",
+            10: "15 Working Days",
+            11: "Endsems!"
+        };
+
+
         function renderCalendar() {
             const today = new Date();
-            const todayISO = today.toISOString().split('T')[0];
+            const todayISO = today.getFullYear() + '-' +
+                String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                String(today.getDate()).padStart(2, '0');
+
             todayLabel.innerText = `Today: ${today.toLocaleDateString('en-GB', {
                 weekday: 'long',
                 day: 'numeric',
@@ -303,7 +315,10 @@
 
                 for (let d = 1; d <= lastDay.getDate(); d++) {
                     const date = new Date(year, month, d);
-                    const iso = date.toISOString().split('T')[0];
+                    const iso = date.getFullYear() + '-' +
+                        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(date.getDate()).padStart(2, '0');
+
                     const weekday = date.getDay();
                     const dayDiv = document.createElement('div');
                     dayDiv.className = 'day';
@@ -330,6 +345,16 @@
                 }
 
                 monthDiv.appendChild(daysContainer);
+
+                // Add personalized note
+                const note = document.createElement('div');
+                note.style.marginTop = '10px';
+                note.style.fontSize = '0.85rem';
+                note.style.color = '#aaa';
+                note.style.textAlign = 'center';
+                note.textContent = monthNotes[month] || '';
+                monthDiv.appendChild(note);
+
                 calendarGrid.appendChild(monthDiv);
             });
         }
